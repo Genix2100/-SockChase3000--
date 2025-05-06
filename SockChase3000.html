@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SockChase3000</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f0f0f0;
+        }
+
+        .menu {
+            text-align: center;
+        }
+
+        .game {
+            display: none;
+            position: relative;
+            width: 600px;
+            height: 400px;
+            background-color: #4CAF50;
+            overflow: hidden;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        h1, h2 {
+            color: #fff;
+        }
+
+        button {
+            padding: 10px 20px;
+            font-size: 18px;
+            background-color: #ff5733;
+            color: white;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+
+        button:hover {
+            background-color: #ff2a00;
+        }
+
+        .sock {
+            width: 50px;
+            height: 80px;
+            background-color: #F1C40F;
+            border-radius: 10px;
+            position: absolute;
+            bottom: 20px;
+            left: 275px;
+        }
+
+        .alien {
+            width: 40px;
+            height: 40px;
+            background-color: #3498db;
+            border-radius: 50%;
+            position: absolute;
+            top: 50px;
+            left: 200px;
+        }
+
+        .message {
+            position: absolute;
+            top: 150px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 24px;
+            color: #fff;
+            visibility: hidden;
+        }
+    </style>
+</head>
+<body>
+    <div id="menu" class="menu">
+        <h1>Welcome to SockChase3000 🧦👽</h1>
+        <p>Press <strong>WASD</strong> to move. Catch the alien to proceed.</p>
+        <button id="startBtn">Start Game</button>
+    </div>
+
+    <div id="game" class="game">
+        <h2>Level <span id="level">1</span></h2>
+        <div id="sock" class="sock"></div>
+        <div id="alien" class="alien"></div>
+        <div id="message" class="message"></div>
+    </div>
+
+    <script>
+        let level = 1;
+        let sock = document.getElementById('sock');
+        let alien = document.getElementById('alien');
+        let message = document.getElementById('message');
+        let levelText = document.getElementById('level');
+        let startBtn = document.getElementById('startBtn');
+        let menu = document.getElementById('menu');
+        let game = document.getElementById('game');
+
+        let sockX = sock.offsetLeft;
+        let sockY = sock.offsetTop;
+        let alienX = alien.offsetLeft;
+        let alienY = alien.offsetTop;
+        let gameInterval;
+        let alienSpeed = 3;
+        let alienDirection = 1;
+
+        startBtn.addEventListener('click', startGame);
+
+        function startGame() {
+            menu.style.display = 'none';
+            game.style.display = 'block';
+            levelText.innerText = level;
+            document.addEventListener('keydown', moveSock);
+            gameInterval = setInterval(gameLoop, 20);
+        }
+
+        function moveSock(event) {
+            if (event.key === 'w') sockY -= 5;
+            if (event.key === 'a') sockX -= 5;
+            if (event.key === 's') sockY += 5;
+            if (event.key === 'd') sockX += 5;
+
+            sock.style.left = sockX + 'px';
+            sock.style.top = sockY + 'px';
+        }
+
+        function gameLoop() {
+            moveAlien();
+            checkCollision();
+            randomTrumpPopUp();
+        }
+
+        function moveAlien() {
+            alienY += alienSpeed * alienDirection;
+            if (alienY <= 0 || alienY >= 360) alienDirection *= -1;
+            alien.style.top = alienY + 'px';
+        }
+
+        function checkCollision() {
+            if (Math.abs(sockX - alienX) < 50 && Math.abs(sockY - alienY) < 50) {
+                level++;
+                levelText.innerText = level;
+                resetAlienPosition();
+                showMessage("You caught the alien! Moving to level " + level);
+                if (level > 100) {
+                    clearInterval(gameInterval);
+                    showMessage("You completed the game! 🎉");
+                }
+            }
+        }
+
+        function resetAlienPosition() {
+            alienX = Math.random() * 500;
+            alienY = Math.random() * 300;
+            alien.style.left = alienX + 'px';
+            alien.style.top = alienY + 'px';
+        }
+
+        function showMessage(text) {
+            message.innerText = text;
+            message.style.visibility = 'visible';
+            setTimeout(() => message.style.visibility = 'hidden', 2000);
+        }
+
+        function randomTrumpPopUp() {
+            if (Math.random() < 0.05) {
+                setTimeout(() => alert('Trump: "You are doing great!" 🇺🇸'), 30000);
+            }
+        }
+    </script>
+</body>
+</html>
