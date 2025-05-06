@@ -1,0 +1,53 @@
+Iată un **README** pe care îl poți folosi pentru a explica oamenilor cum să joace jocul direct în browser:
+
+---
+
+# SockChase3000 🎮🧦👽
+
+Welcome to **SockChase3000**! A simple and fun game where you control a sock using **WASD** keys to chase and catch an alien! Each time you catch the alien, you progress to the next level. Keep going until you reach the final level. Can you make it to **level 100**? 🎉
+
+---
+
+## How to Play 🚀
+
+1. **Clone** or **Download** this repository.
+
+2. **Open the HTML file**:
+
+   * Download the `SockChase3000.html` file.
+   * Open it directly in your browser (just double-click it).
+
+3. **Use the WASD keys** to move the sock:
+
+   * **W**: Move up
+   * **A**: Move left
+   * **S**: Move down
+   * **D**: Move right
+
+4. Catch the alien to advance to the next level! 🎯
+
+---
+
+## Features 🌟
+
+* 100 exciting levels to beat.
+* Random Trump pop-up after 30 seconds 😆
+* Funny messages after each level 🥳
+* Simple and fun to play — no installation required!
+
+---
+
+## Credits 🤝
+
+* **Game**: Created by \[Your Name] (Radu)
+* **Idea**: Fun, random, and quirky arcade-style gameplay with a simple goal!
+
+---
+
+## License ⚖️
+
+Feel free to share and enjoy the game! If you want to modify or distribute, just give credit where it's due. 😎
+
+---
+
+You can include this in a `README.md` file in the same directory as your `SockChase3000.html`. It provides all the necessary instructions and details for someone to quickly access and play your game directly in the browser!
